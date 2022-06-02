@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('Post', { 
+  const Post = sequelize.define('Post', { 
     title: {
       type: DataTypes.STRING,
       validate: {
