@@ -6,12 +6,16 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('Post', { 
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
     }
   });
 
-  User.associate = function(models) {
+  Post.associate = function(models) {
     // associations can be defined here
+    Post.belongsTo(models.User, { foreignKey: 'userId'});
+    Post.hasMany(models.Comment, { foreignkey: 'recipeId', onDelete: 'CASCADE', hooks: true });
   };
 
   return Post;
