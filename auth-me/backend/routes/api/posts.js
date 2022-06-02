@@ -21,7 +21,7 @@ router.post(
   validatePost,
   asyncHandler(async (req, res) => {
     const { title } = req.body;
-    const post = await Post.signup({ title });
+    const post = await Post.post({ title });
 
     await setTokenCookie(res, user);
 
