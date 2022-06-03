@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import PostForm from './PostForm';
+import PostFormPage from './PostForm';
 
 function PostFormModal() {
     const [showModal, setShowModal] = useState(false);
@@ -10,7 +10,7 @@ function PostFormModal() {
             <button onClick={() => setShowModal(true)}>Post</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <PostForm />
+                    <PostFormPage />
                 </Modal>
             )}
         </>

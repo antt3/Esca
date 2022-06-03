@@ -6,25 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as postsReducer from "../../store/postsReducer";
 
-function SignupFormPage() {
+function PostFormPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [post, setPost] = useState("");
     const [errors, setErrors] = useState([]);
   
-    if (sessionUser) return <Redirect to="/" />;
+    if (!sessionUser) return <Redirect to="/" />;
   
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (post === "") {
+        if (post !== "") {
             setErrors([]);
-            return dispatch(postsReducer.({ post }))
+            return dispatch(postsReducer.writePost({ post }))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        return setErrors(['Must write a post']);
     };
   
     return (
@@ -46,4 +46,4 @@ function SignupFormPage() {
     );
 }
 
-export default SignupFormPage;
+export default PostFormPage;
