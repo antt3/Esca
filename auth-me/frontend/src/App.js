@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+import SignupForm from "./components/SignupFormPage/SignupForm";
+import LoginForm from "./components/LoginFormModal/LoginForm";
+import PostForm from "./components/PostFormModal/PostForm";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -18,7 +20,13 @@ function App() {
             {isLoaded && (
                 <Switch>
                     <Route path="/signup">
-                        <SignupFormPage />
+                        <SignupForm />
+                    </Route>
+                    <Route path="/login">
+                        <LoginForm />
+                    </Route>
+                    <Route path="/posts/new">
+                        <PostForm />
                     </Route>
                 </Switch>
             )}

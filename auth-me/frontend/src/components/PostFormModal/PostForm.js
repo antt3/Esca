@@ -23,13 +23,23 @@ function PostFormPage() {
                 title,
                 userId
             };
-            return dispatch(postsReducer.writePost(newPost))
+            const returnedPost = dispatch(postsReducer.writePost(newPost))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
+            if (returnedPost) {
+                reset();
+                // history.pushState(`/users/${userId}/posts`)
+                return;
+            }
+            
         }
         return setErrors(['Must write a post']);
+    };
+
+    const reset = () => {
+        setTitle('');
     };
   
     return (
