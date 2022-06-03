@@ -1,5 +1,5 @@
-const LOAD_POSTS = 'articles/loadPosts';
-const ADD_POST = 'articles/addPosts';
+const LOAD_POSTS = 'posts/loadPosts';
+const ADD_POST = 'posts/addPosts';
 
 export const loadPosts = (posts) => {
   return {

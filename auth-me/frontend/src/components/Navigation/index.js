@@ -5,7 +5,7 @@ import './Navigation.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import PostFormModal from './PostFormModal';
+import PostFormModal from '../PostFormModal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
 
