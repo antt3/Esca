@@ -20,14 +20,11 @@ router.post(
   '/',
   validatePost,
   asyncHandler(async (req, res) => {
-    const { title } = req.body;
-    const post = await Post.post({ title });
-
+    const post = await Post.create(req.body);
+    
     await setTokenCookie(res, user);
 
-    return res.json({
-      post,
-    });
+    return res.json(post);
   }),
 );
 

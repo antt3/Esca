@@ -1,3 +1,5 @@
+import { csrfFetch } from './csrf';
+
 const LOAD_POSTS = 'posts/loadPosts';
 const ADD_POST = 'posts/addPosts';
 
@@ -8,10 +10,10 @@ export const loadPosts = (posts) => {
   };
 };
 
-export const addPosts = (posts) => {
+export const addPosts = (post) => {
   return {
     type: ADD_POST,
-    posts
+    post
   };
 };
 
@@ -22,7 +24,9 @@ export const fetchPosts = () => async (dispatch) => {
 };
 
 export const writePost = (payload) => async (dispatch) => {
-  const response = await fetch('/api/posts', {
+    console.log('post reducer: ', payload)
+
+  const response = await csrfFetch('/api/posts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
@@ -30,8 +34,7 @@ export const writePost = (payload) => async (dispatch) => {
 
   if (response.ok) {
     const post = await response.json();
-    dispatch((post));
-    return post;
+    dispatch(addPosts(post));
   }
 };
 
@@ -40,9 +43,9 @@ const initialState = { entries: {}, isLoading: true };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_POSTS: 
-      return { ...state, entries: [...action.posts] };
+      return { ...state.entries, [action.posts]: action.posts };
     case ADD_POST:
-      return { ...state, entries: [...state.entries, action.posts] };
+      return { ...state, entries: [...state.entries, action.article] };
     default:
       return state;
   }

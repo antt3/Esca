@@ -9,16 +9,21 @@ import * as postsReducer from "../../store/postsReducer";
 function PostFormPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const [post, setPost] = useState("");
+    const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   
     if (!sessionUser) return <Redirect to="/" />;
   
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (post !== "") {
+        const userId = sessionUser.id;
+        if (title !== "") {
             setErrors([]);
-            return dispatch(postsReducer.writePost({ post }))
+            const newPost = {
+                title,
+                userId
+            };
+            return dispatch(postsReducer.writePost(newPost))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
@@ -36,8 +41,8 @@ function PostFormPage() {
                 Write your post
                 <input
                     type="text"
-                    value={post}
-                    onChange={(e) => setPost(e.target.value)}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     required
                 />
             </label>

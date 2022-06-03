@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       }
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: true,
+      }
     }
   });
 
