@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 import './PostForm.css';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as postsReducer from "../../store/postsReducer";
 
-function PostFormPage() {
+function PostFormPage({sessionUser}) {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   

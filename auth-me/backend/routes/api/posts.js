@@ -8,6 +8,11 @@ const { Post } = require('../../db/models');
 
 const router = express.Router();
 
+router.get('/', asyncHandler(async (_req, res) => {
+    const posts = await Post.findAll();
+    res.json(posts);
+  }));
+
 const validatePost = [
     check('title')
         .exists({ checkFalsy: true })
@@ -21,7 +26,7 @@ router.post(
   validatePost,
   asyncHandler(async (req, res) => {
     const post = await Post.create(req.body);
-    
+
     await setTokenCookie(res, user);
 
     return res.json(post);

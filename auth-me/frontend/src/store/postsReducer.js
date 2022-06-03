@@ -42,10 +42,14 @@ const initialState = { entries: {}, isLoading: true };
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
+    // case LOAD_POSTS: 
+    //   return { ...state.entries, [action.posts]: action.posts };
+    // case ADD_POST:
+    //   return { ...state.entries, [action.post.id]: action.post };
     case LOAD_POSTS: 
-      return { ...state.entries, [action.posts]: action.posts };
+      return { ...state, entries: [...action.posts] };
     case ADD_POST:
-      return { ...state, entries: [...state.entries, action.article] };
+      return { ...state, entries: [...state.entries, action.post] };
     default:
       return state;
   }
