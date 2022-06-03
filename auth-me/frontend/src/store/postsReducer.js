@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_POSTS = 'posts/loadPosts';
-const ADD_POST = 'posts/addPosts';
+const ADD_POST = 'posts/addPost';
 
 export const loadPosts = (posts) => {
   return {
@@ -10,7 +10,7 @@ export const loadPosts = (posts) => {
   };
 };
 
-export const addPosts = (post) => {
+export const addPost = (post) => {
   return {
     type: ADD_POST,
     post
@@ -34,11 +34,12 @@ export const writePost = (payload) => async (dispatch) => {
 
   if (response.ok) {
     const post = await response.json();
-    dispatch(addPosts(post));
+    dispatch(addPost(post));
+    return post;
   }
 };
 
-const initialState = { entries: {}, isLoading: true };
+const initialState = { entries: [], isLoading: true };
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {

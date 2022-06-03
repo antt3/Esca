@@ -23,10 +23,7 @@ function PostFormPage() {
                 sessionUser
             };
             const returnedPost = dispatch(postsReducer.writePost(newPost))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
+            
             if (returnedPost) {
                 reset();
                 // history.pushState(`/users/${userId}/posts`)

@@ -8,8 +8,8 @@ const PostList = () => {
   const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
-  const posts = useSelector(state=>state.post);
-  console.log(posts)
+  const posts = useSelector(state=>state.postState.entries);
+  console.log("posts: ", posts)
 
   useEffect(() => {
     dispatch(fetchPosts());
