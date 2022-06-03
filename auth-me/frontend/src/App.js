@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useSelector } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupForm from "./components/SignupFormPage/SignupForm";
@@ -15,23 +15,22 @@ function App() {
         dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     }, [dispatch]);
     
-    const sessionUser = useSelector(state => state.session.user);
     return (
         <>
             <Navigation isLoaded={isLoaded} />
             {isLoaded && (
                 <Switch>
                     <Route exact path="/">
-                        <PostList user={sessionUser}/>
+                        <PostList />
                     </Route>
                     <Route path="/signup">
-                        <SignupForm user={sessionUser}/>
+                        <SignupForm />
                     </Route>
                     <Route path="/login">
-                        <LoginForm user={sessionUser}/>
+                        <LoginForm />
                     </Route>
                     <Route path="/posts/new">
-                        <PostForm user={sessionUser}/>
+                        <PostForm />
                     </Route>
                 </Switch>
             )}

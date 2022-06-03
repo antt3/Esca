@@ -3,12 +3,12 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+// const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Post } = require('../../db/models');
 
 const router = express.Router();
 
-router.get('/', asyncHandler(async (_req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
     const posts = await Post.findAll();
     res.json(posts);
   }));
@@ -25,9 +25,11 @@ router.post(
   '/',
   validatePost,
   asyncHandler(async (req, res) => {
-    const post = await Post.create(req.body);
+    const { title, sessionUser } = req.body;
+    const userId = sessionUser.id;
+    const post = await Post.create({ title, userId });
 
-    await setTokenCookie(res, user);
+    // await setTokenCookie(res, sessionUser);
 
     return res.json(post);
   }),

@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
-import SingleArticle from '../SingleArticle';
+import SinglePost from '../SinglePost';
 import { fetchPosts } from '../../store/postsReducer';
 
-const PostList = ({sessionUser}) => {
+const PostList = () => {
+  const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
-  
-  const posts = useSelector(state=>state.postState.entries);
+  const posts = useSelector(state=>state.post);
+  console.log(posts)
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -18,16 +19,16 @@ const PostList = ({sessionUser}) => {
 
   return (
     <div>
-      <h1>Article List</h1>
+      <h1>Posts List</h1>
       <ol>
         {posts.map(({ id, title }) => (
-          <li key={id}><NavLink to={`/article/${id}`}>{title}</NavLink></li>
+          <li key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></li>
         ))}
       </ol>
 
       <Switch>
-        <Route path='/article/:id'>
-          <SingleArticle posts={posts} />
+        <Route path='/posts/:id'>
+          <SinglePost posts={posts} />
         </Route>
       </Switch>
     </div>
