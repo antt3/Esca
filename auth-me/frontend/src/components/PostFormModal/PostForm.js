@@ -3,18 +3,19 @@ import React, { useState } from "react";
 import './PostForm.css';
 
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as postsReducer from "../../store/postsReducer";
 
 function PostFormPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   
     if (!sessionUser) return <Redirect to="/login" />;
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (title !== "") {
             setErrors([]);
@@ -22,12 +23,12 @@ function PostFormPage() {
                 title,
                 sessionUser
             };
-            const returnedPost = dispatch(postsReducer.writePost(newPost))
+            const returnedPost = await dispatch(postsReducer.writePost(newPost))
             
             if (returnedPost) {
                 reset();
-                // history.pushState(`/users/${userId}/posts`)
-                return;
+
+                return history.push(`/posts/${returnedPost.id}`);
             }
             
         }

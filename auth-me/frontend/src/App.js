@@ -7,6 +7,7 @@ import PostForm from "./components/PostFormModal/PostForm";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PostList from "./components/PostList";
+import SinglePost from "./components/SinglePost";
 
 function App() {
     const dispatch = useDispatch();
@@ -23,14 +24,17 @@ function App() {
                     <Route exact path="/">
                         <PostList />
                     </Route>
-                    <Route path="/signup">
+                    <Route exact path="/signup">
                         <SignupForm />
                     </Route>
-                    <Route path="/login">
+                    <Route exact path="/login">
                         <LoginForm />
                     </Route>
-                    <Route path="/posts/new">
+                    <Route exact path="/posts/new">
                         <PostForm />
+                    </Route>
+                    <Route exact path="/posts/:id">
+                        <SinglePost />
                     </Route>
                 </Switch>
             )}

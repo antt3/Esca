@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import SinglePost from '../SinglePost';
 import { fetchPosts } from '../../store/postsReducer';
+import './PostList.css';
 
 const PostList = () => {
   const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
   const posts = useSelector(state=>state.postState.entries);
-  console.log("posts: ", posts)
 
   useEffect(() => {
     dispatch(fetchPosts());
