@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_POSTS = 'posts/loadPosts';
+const SINGLE_POST = 'posts/singlePost';
 const ADD_POST = 'posts/addPost';
 const EDIT_POST = 'posts/editPost';
 const DELETE_POST = 'posts/deletPost'
@@ -10,6 +11,13 @@ export const loadPosts = (posts) => {
     type: LOAD_POSTS,
     posts
   };
+};
+
+export const singlePost = (post) => {
+  return {
+    type: SINGLE_POST,
+    post
+  }
 };
 
 export const addPost = (post) => {
@@ -34,13 +42,24 @@ export const deletePost = (post) => {
 };
 
 export const fetchPosts = () => async (dispatch) => {
-  const response = await fetch('/api/posts');
-  const posts = await response.json();
-  dispatch(loadPosts(posts));
-  return posts;
+  const response = await csrfFetch('/api/posts');
+  if (response.ok) {
+    const posts = await response.json();
+    dispatch(loadPosts(posts));
+    return posts;
+  }
 };
 
-export const writePost = (payload) => async (dispatch) => {
+export const onePost = (payload) => async dispatch =>{
+  const response = await csrfFetch (`/api/marinas/${payload}`);
+
+  if(response.ok){
+      const details = await response.json();
+      dispatch(singlePost(details));
+  }
+};
+
+export const writePost = (payload) => async dispatch => {
     console.log('post reducer: ', payload)
 
   const response = await csrfFetch('/api/posts', {
@@ -64,7 +83,7 @@ export const updatePost = (payload) => async dispatch => {
   })
   if (response.ok) {
     const post = await response.json();
-    dispatch(addPost(post));
+    dispatch(editPost(post));
     return post;
   }
 };
@@ -75,27 +94,36 @@ export const removePost = (postId) => async dispatch => {
     body: JSON.stringify({postId})
   })
   if (response.ok) {
-    const allPosts = await response.json();
-    dispatch(deletePost(allPosts))
-    return allPosts;
+    const post = await response.json();
+    dispatch(deletePost(post))
+    return 'Post Deleted'
   }
 };
 
 const initialState = { entries: [], isLoading: true };
 
 const postReducer = (state = initialState, action) => {
+  let newState;
+
   switch (action.type) {
     case LOAD_POSTS: 
-      const newPosts = {};
+      newState = {...state};
       action.posts.forEach((post) => newState[post.id] = post);
-      return { ...state, ...newPosts}
+      return newState
+    case SINGLE_POST:
+      newState = {...state}
+      newState.post = action.details
+      return newState
     case ADD_POST:
-      return { ...state, entries: [...state.entries, action.post] };
+      newState = {...state}
+      newState = { ...state, entries: [...state.entries, action.post] };
+      return newState
     case EDIT_POST:
+      newState = {...state}
       return { ...state, [ action.post.id ]: action.post };
     case DELETE_POST:
-      const newState = { ...state };
-      delete newState[action.postId];
+      newState = { ...state };
+      delete newState[action.id];
       return newState;
     default:
       return state;
