@@ -32,7 +32,28 @@ router.post(
     // await setTokenCookie(res, sessionUser);
 
     return res.json(post);
-  }),
+  })
 );
+
+router.put(
+  '/:id(\\d+)',
+  validatePost,
+  asyncHandler(async (req, res) => {
+    const postId = await Post.findByPk(req.params.id);
+    const { title } = req.body;
+    await postId.update({ title })
+    const post = await Post.findByPk(req.params.id);
+    return res.json(post);
+  })
+);
+
+router.delete('/:id(\\d+)', asyncHandler(async function(req, res) {
+
+  const post = await Business.findByPk(req.params.id)
+  await post.destroy();
+  return res.json(req.params.id)
+}));
+
+
 
 module.exports = router;

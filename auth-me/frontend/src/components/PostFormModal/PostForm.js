@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as postsReducer from "../../store/postsReducer";
 
-function PostFormPage() {
+function PostFormPage({setShowModal}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -27,6 +27,8 @@ function PostFormPage() {
             
             if (returnedPost) {
                 reset();
+
+                setShowModal(false);
 
                 return history.push(`/posts/${returnedPost.id}`);
             }
