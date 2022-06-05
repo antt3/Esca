@@ -7,13 +7,21 @@ import './PostList.css';
 
 const PostList = () => {
   const sessionUser = useSelector(state => state.session.user);
-
+  // let [ reload, setReload ] = useState(0);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postState);
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (reload < 2) {
+  //     setReload(reload++);
+  //   }
+  // }, [reload]);
+
+
 
   if (!sessionUser) return <Redirect to="/login" />;
 

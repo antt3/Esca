@@ -60,7 +60,6 @@ export const onePost = (payload) => async dispatch =>{
 };
 
 export const writePost = (payload) => async dispatch => {
-    console.log('post reducer: ', payload)
 
   const response = await csrfFetch('/api/posts', {
     method: 'POST',
@@ -75,11 +74,12 @@ export const writePost = (payload) => async dispatch => {
   }
 };
 
-export const updatePost = (postId) => async dispatch => {
-  const response = await csrfFetch(`/api/posts/${postId.id}`, {
+export const updatePost = (payload) => async dispatch => {
+  console.log("----Payload-----", payload.singlePost.id);
+  const response = await csrfFetch(`/api/posts/${payload.singlePost.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(postId)
+    body: JSON.stringify(payload)
   })
   if (response.ok) {
     const post = await response.json();
@@ -89,7 +89,6 @@ export const updatePost = (postId) => async dispatch => {
 };
 
 export const removePost = (postId) => async dispatch => {
-  console.log("body-", JSON.stringify( postId ))
   const response = await csrfFetch (`/api/posts/${postId.id}`, {
     method: 'DELETE',
   })

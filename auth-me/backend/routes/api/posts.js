@@ -39,9 +39,9 @@ router.put(
   '/:id(\\d+)',
   validatePost,
   asyncHandler(async (req, res) => {
+    const { title, sessionUser } = req.body;
     const postId = parseInt(req.params.id);
     const post = await Post.findByPk(postId);
-    const { title } = req.body;
     await post.update({ title })
     const newPost = await Post.findByPk(postId);
     return res.json(newPost);
