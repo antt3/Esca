@@ -9,7 +9,7 @@ const PostList = () => {
   const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
-  const posts = useSelector((state) => Object.values(state.postState));
+  const posts = useSelector((state) => state.postState);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -21,7 +21,7 @@ const PostList = () => {
     <div>
       <h1>Posts List</h1>
       <ol>
-        {posts.map(({ id, title }) => (
+        {Object.values(posts).map(({ id, title }) => (
           <li key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></li>
         ))}
       </ol>

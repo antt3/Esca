@@ -49,7 +49,7 @@ router.put(
 
 router.delete('/:id(\\d+)', asyncHandler(async function(req, res) {
 
-  const post = await Business.findByPk(req.params.id)
+  const post = await Post.findByPk(req.params.id)
   await post.destroy();
   return res.json(req.params.id)
 }));
