@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 function LoginForm() {
+    const sessionUser = useSelector(state => state.session.user);
+
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -18,6 +21,8 @@ function LoginForm() {
             }
         );
     };
+
+    if (sessionUser) return <Redirect to="/" />;
 
     return (
         <form onSubmit={handleSubmit}>

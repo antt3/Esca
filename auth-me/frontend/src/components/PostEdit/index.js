@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
-import './PostForm.css';
+import './EditForm.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as postsReducer from "../../store/postsReducer";
 
-function PostFormPage({setShowModal}) {
+function EditForm({props}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
+    const setShowModal = props[0];
+    const singlePost = props[1];
   
     if (!sessionUser) return <Redirect to="/login" />;
   
@@ -19,11 +21,12 @@ function PostFormPage({setShowModal}) {
         e.preventDefault();
         if (title !== "") {
             setErrors([]);
-            const newPost = {
+            const editedPost = {
                 title,
-                sessionUser
+                sessionUser,
+                singlePost
             };
-            const returnedPost = await dispatch(postsReducer.writePost(newPost))
+            const returnedPost = await dispatch(postsReducer.updatePost(editedPost))
             
             if (returnedPost) {
                 reset();
@@ -47,7 +50,7 @@ function PostFormPage({setShowModal}) {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
-                Write your post
+                Edit your post
                 <input
                     type="text"
                     value={title}
@@ -55,9 +58,9 @@ function PostFormPage({setShowModal}) {
                     required
                 />
             </label>
-            <button type="submit">Post</button>
+            <button type="submit">Submit</button>
         </form>
-    );
+    )
 }
 
-export default PostFormPage;
+export default EditForm

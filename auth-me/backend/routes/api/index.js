@@ -11,7 +11,7 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.use('./posts', postsRouter);
+router.use('/posts', postsRouter);
 
 // POST /test
 // router.post('/test', function(req, res) {
