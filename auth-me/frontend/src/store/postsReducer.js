@@ -89,14 +89,14 @@ export const updatePost = (payload) => async dispatch => {
 };
 
 export const removePost = (postId) => async dispatch => {
-  const response = await csrfFetch (`/api/posts/${postId}`, {
+  console.log("body-", JSON.stringify( postId ))
+  const response = await csrfFetch (`/api/posts/${postId.id}`, {
     method: 'DELETE',
-    body: JSON.stringify({postId})
   })
   if (response.ok) {
     const post = await response.json();
     dispatch(deletePost(post))
-    return 'Post Deleted'
+    return post;
   }
 };
 
@@ -112,7 +112,7 @@ const postReducer = (state = initialState, action) => {
       return newState
     case SINGLE_POST:
       newState = {...state}
-      newState.post = action.details
+      newState.post = action.post
       return newState
     case ADD_POST:
       newState = {...state}
@@ -123,7 +123,7 @@ const postReducer = (state = initialState, action) => {
       return { ...state, [ action.post.id ]: action.post };
     case DELETE_POST:
       newState = { ...state };
-      delete newState[action.id];
+      delete newState[action.post.id];
       return newState;
     default:
       return state;

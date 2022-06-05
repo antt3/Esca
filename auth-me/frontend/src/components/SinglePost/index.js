@@ -14,12 +14,10 @@ const SinglePost = () => {
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);
 
-  const deletePost = (postId) => {
-    dispatch(removePost(postId));
+  const deletePost = (singlePost) => {
+    dispatch(removePost(singlePost));
     history.push('/');
 }
-
-  console.log('singlePost: ', singlePost.userId, "sessionUserId: ", sessionUser.id);
 
   if (!sessionUser) return <Redirect to="/login" />;
 
@@ -27,7 +25,7 @@ const SinglePost = () => {
     return (
       <div className='singlePost'>
         <h1>{singlePost.title}</h1>
-        <button  value={singlePost.id}  onClick={()=>deletePost(singlePost.id)}>Delete</button>
+        <button  value={singlePost}  onClick={()=>deletePost(singlePost)}>Delete</button>
       </div>
     );
   } else {

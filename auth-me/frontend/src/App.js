@@ -24,6 +24,9 @@ function App() {
                     <Route exact path="/">
                         <PostList />
                     </Route>
+                    <Route exact path="/posts">
+                        <PostList />
+                    </Route>
                     <Route exact path="/signup">
                         <SignupForm />
                     </Route>

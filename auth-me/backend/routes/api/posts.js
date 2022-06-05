@@ -39,7 +39,7 @@ router.put(
   '/:id(\\d+)',
   validatePost,
   asyncHandler(async (req, res) => {
-    const postId = await Post.findByPk(req.params.id);
+    const postId = await Post.findByPk(req.params.body);
     const { title } = req.body;
     await postId.update({ title })
     const post = await Post.findByPk(req.params.id);
@@ -47,11 +47,19 @@ router.put(
   })
 );
 
-router.delete('/:id(\\d+)', asyncHandler(async function(req, res) {
-
-  const post = await Post.findByPk(req.params.id)
-  await post.destroy();
-  return res.json(req.params.id)
+router.delete(
+  '/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+  const postId = parseInt(req.params.id, 10)
+  console.log("req- ", postId);
+  const post = await Post.findByPk(postId)
+  console.log("post1-", post)
+  if (post) {
+    await post.destroy();
+    return res.json(postId)
+  } else {
+    throw new Error('Cannot find post.');
+  }
 }));
 
 
