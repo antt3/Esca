@@ -4,14 +4,19 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const postsRouter = require('./posts.js');
+const commentsRouter = require('./comments.js');
 // const { setTokenCookie } = require('../../utils/auth.js');
-const { User } = require('../../db/models');
+// const { User } = require('../../db/models');
 
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
 router.use('/posts', postsRouter);
+
+router.use('/comments', commentsRouter);
+
+module.exports = router;
 
 // POST /test
 // router.post('/test', function(req, res) {
@@ -48,6 +53,4 @@ router.use('/posts', postsRouter);
 //     return res.json(req.user);
 //   }
 // );
-
-module.exports = router;
 
