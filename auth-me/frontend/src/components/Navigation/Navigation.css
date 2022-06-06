@@ -89,3 +89,7 @@ h1 {
     justify-content: center;
     font-size: 35px;
 }
+
+a, p, h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
