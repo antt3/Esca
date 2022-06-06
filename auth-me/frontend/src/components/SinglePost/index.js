@@ -33,7 +33,7 @@ const SinglePost = () => {
     dispatch(fetchPosts());
   }, [ dispatch ]);
   
-  if (!sessionUser) return <Redirect to="/login" />;
+  if (!sessionUser) return <Redirect to="/splash" />;
 
   if (singlePost.userId === sessionUser.id) {
     return (

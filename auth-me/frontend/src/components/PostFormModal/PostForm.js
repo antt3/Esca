@@ -13,7 +13,7 @@ function PostFormPage({setShowModal}) {
     const [title, setTitle] = useState("");
     const [errors, setErrors] = useState([]);
   
-    if (!sessionUser) return <Redirect to="/login" />;
+    if (!sessionUser) return <Redirect to="/splash" />;
   
     const handleSubmit = async(e) => {
         e.preventDefault();

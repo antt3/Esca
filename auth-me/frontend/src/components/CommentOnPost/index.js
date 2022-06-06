@@ -15,7 +15,7 @@ function CommentOnPost({props}) {
     const setShowModal2 = props[0];
     const singlePost = props[1];
   
-    if (!sessionUser) return <Redirect to="/login" />;
+    if (!sessionUser) return <Redirect to="/splash" />;
   
     const handleSubmit = async(e) => {
         e.preventDefault();

@@ -20,14 +20,14 @@ function DeletePost({props}) {
             
     }
   
-    if (!sessionUser) return <Redirect to="/login" />;
+    if (!sessionUser) return <Redirect to="/splash" />;
   
     return (
         <>
             <p>
                 Are you sure you want to delete this post?
             </p>
-            <button onClick={(e)=> handleClick(e)}>Confirm</button>
+            <button className="delBut" onClick={(e)=> handleClick(e)}>Confirm</button>
         </>
     )
 }

@@ -14,7 +14,7 @@ const PostList = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  if (!sessionUser) return <Redirect to="/login" />;
+  if (!sessionUser) return <Redirect to="/splash" />;
 
   return (
     <div>
