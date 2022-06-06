@@ -7,6 +7,7 @@ import { Modal } from '../../context/Modal';
 import PostEdit from '../PostEdit';
 import CommentOnPost from '../CommentOnPost';
 import DeletePost from '../DeletePost';
+import DeleteComment from '../DeleteComment';
 import { fetchComments } from '../../store/commentsReducer';
 import { fetchPosts } from '../../store/postsReducer'; 
 
@@ -18,16 +19,14 @@ const SinglePost = () => {
   const [ showModal, setShowModal ] = useState(false);
   const [ showModal2, setShowModal2 ] = useState(false);
   const [ showModal3, setShowModal3 ] = useState(false);
+  const [ showModal4, setShowModal4 ] = useState(false);
+
 
 
 
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);
   const postComments = Object.values(comments).filter(comment => comment.PostId === singlePost.id);
-
- console.log("PostComments-----", postComments)
-
-// [postComments].map(postComment => console.log("id-- ", postComment, "description-- ", postComment));
 
 useEffect(() => {
   dispatch(fetchComments());
@@ -63,7 +62,19 @@ useEffect(() => {
           <h1>Comments List</h1>
           <div className='comments'>
             { postComments.length ? postComments.map((postComment) => {
-              return <p key={postComment.id}>{postComment.description}</p>
+              if (postComment.userId === sessionUser.id) {
+                return (
+                  <>
+                    <p key={postComment.id}>{postComment.description}</p>
+                    <button onClick={()=>setShowModal4(true)}>Delete</button>
+                    {showModal4 && (
+                      <Modal onClose={() => setShowModal4(false)}>
+                        <DeleteComment props={[setShowModal4, postComment]} />
+                      </Modal>
+                    )}
+                  </>
+                );
+              } else { return (<p key={postComment.id}>{postComment.description}</p>);}
             }) : <p>There are no comments yet...</p>}
           </div>
         </article>
@@ -84,7 +95,19 @@ useEffect(() => {
         <h1>Comments List</h1>
         <div className='comments'>
         { postComments.length ? postComments.map((postComment) => {
-          return <p key={postComment.id}>{postComment.description}</p>
+          if (postComment.userId === sessionUser.id) {
+            return (
+              <>
+                <p key={postComment.id}>{postComment.description}</p>
+                <button onClick={()=>setShowModal4(true)}>Delete</button>
+                {showModal4 && (
+                  <Modal onClose={() => setShowModal4(false)}>
+                    <DeleteComment props={[setShowModal4, postComment]} />
+                  </Modal>
+                )}
+              </>
+            );
+          } else { return (<p key={postComment.id}>{postComment.description}</p>);}
         }) : <p>There are no comments yet...</p>}
         </div>
       </>
