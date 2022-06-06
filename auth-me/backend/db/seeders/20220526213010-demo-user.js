@@ -11,52 +11,52 @@ module.exports = {
       },
       {
         email: 'user1@user.io',
-        username: 'FakeUser1',
+        username: 'GoneHome',
         hashedPassword: bcrypt.hashSync('password1')
       },
       {
         email: 'user2@user.io',
-        username: 'FakeUser2',
+        username: 'RamsayHater',
         hashedPassword: bcrypt.hashSync('password2')
       },
       {
         email: 'user3@user.io',
-        username: 'FakeUser3',
+        username: 'Anon1',
         hashedPassword: bcrypt.hashSync('password3')
       },
       {
         email: 'user4@user.io',
-        username: 'FakeUser4',
+        username: 'Catty',
         hashedPassword: bcrypt.hashSync('password4')
       },
       {
         email: 'user5@user.io',
-        username: 'FakeUser5',
+        username: 'Real1',
         hashedPassword: bcrypt.hashSync('password5')
       },
       {
         email: 'user6@user.io',
-        username: 'FakeUser6',
+        username: 'CaptainJack',
         hashedPassword: bcrypt.hashSync('password6')
       },
       {
         email: 'user7@user.io',
-        username: 'FakeUser7',
+        username: 'RottenApple',
         hashedPassword: bcrypt.hashSync('password7')
       },
       {
         email: 'user8@user.io',
-        username: 'FakeUser8',
+        username: 'HaveToCook',
         hashedPassword: bcrypt.hashSync('password8')
       },
       {
         email: 'user9@user.io',
-        username: 'FakeUser9',
+        username: 'Honesty',
         hashedPassword: bcrypt.hashSync('password9')
       },
       {
         email: 'user10@user.io',
-        username: 'FakeUser10',
+        username: 'TheDon',
         hashedPassword: bcrypt.hashSync('password10')
       },
 
