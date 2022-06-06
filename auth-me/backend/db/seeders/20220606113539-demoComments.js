@@ -27,7 +27,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
         {
-					description: 'Obviosly Himalayan Pink Salt.',
+					description: 'Obviously Himalayan Pink Salt.',
 					userId: 4,
 					PostId: 3,
 					createdAt: new Date(),
@@ -55,7 +55,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
         {
-					description: 'Cannot go weong with sea salt.',
+					description: 'Cannot go wrong with sea salt.',
 					userId: 1,
 					PostId: 3,
 					createdAt: new Date(),
