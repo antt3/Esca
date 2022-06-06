@@ -18,7 +18,7 @@ const PostList = () => {
 
   return (
     <div>
-      <h1>Posts List</h1>
+      <h1>Recent Posts</h1>
       <div>
         {Object.values(posts).map(({ id, title }) => (
           <div key={id} className="postList"><NavLink to={`/posts/${id}`}>{title}</NavLink></div>

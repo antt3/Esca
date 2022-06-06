@@ -1,0 +1,27 @@
+div.singlePost  {
+    display: flex;
+    justify-content: space-around;
+}
+
+.single {
+    background-color: rgb(208, 170, 243);
+
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.comments > p {
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ch1 {
+    font-size: 28px;
+}

@@ -39,35 +39,37 @@ const SinglePost = () => {
     return (
       <> 
         <article>
-          <div className='singlePost'>
+          <div>
             <h1>{singlePost.title}</h1>
-            <button onClick={()=>setShowModal3(true)}>Delete</button>
+          </div>
+          <div className='singlePost'>
+            <button className="single" onClick={()=>setShowModal3(true)}>Delete Post</button>
             {showModal3 && (
               <Modal onClose={() => setShowModal3(false)}>
                 <DeletePost props={[setShowModal3, singlePost]} />
               </Modal>
             )}
-            <button onClick={() => setShowModal(true)}>Edit</button>
+            <button className="single" onClick={() => setShowModal(true)}>Edit </button>
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 <PostEdit props={[setShowModal, singlePost]} />
               </Modal>
             )}
-              <button onClick={() => setShowModal2(true)}>Comment</button>
+              <button className="single" onClick={() => setShowModal2(true)}>Comment</button>
               {showModal2 && (
                 <Modal onClose={() => setShowModal2(false)}>
                   <CommentOnPost props={[setShowModal2, singlePost]} />
                 </Modal>
               )}
           </div>
-          <h1>Comments List</h1>
+          <h1 className="ch1">Comments</h1>
           <div className='comments'>
             { postComments.length ? postComments.map((postComment) => {
               if (postComment.userId === sessionUser.id) {
                 return (
                   <>
                     <p key={postComment.id}>{postComment.description}</p>
-                    <button onClick={()=>setShowModal4(true)}>Delete</button>
+                    <button className="single" onClick={()=>setShowModal4(true)}>Delete Comment</button>
                     {showModal4 && (
                       <Modal onClose={() => setShowModal4(false)}>
                         <DeleteComment props={[setShowModal4, postComment]} />
@@ -84,23 +86,25 @@ const SinglePost = () => {
   } else {
     return (
       <>
-        <div className='singlePost'>
+        <div>
           <h1>{singlePost.title}</h1>
-          <button onClick={() => setShowModal2(true)}>Comment</button>
+        </div>
+        <div className="singlePost">
+          <button className="single" onClick={() => setShowModal2(true)}>Comment</button>
             {showModal2 && (
               <Modal onClose={() => setShowModal2(false)}>
                 <CommentOnPost props={[setShowModal2, singlePost]} />
               </Modal>
             )}
         </div>
-        <h1>Comments List</h1>
+        <h1 className="ch1">Comments</h1>
         <div className='comments'>
         { postComments.length ? postComments.map((postComment) => {
           if (postComment.userId === sessionUser.id) {
             return (
               <>
                 <p key={postComment.id}>{postComment.description}</p>
-                <button onClick={()=>setShowModal4(true)}>Delete</button>
+                <button className="single" onClick={()=>setShowModal4(true)}>Delete Comment</button>
                 {showModal4 && (
                   <Modal onClose={() => setShowModal4(false)}>
                     <DeleteComment props={[setShowModal4, postComment]} />
