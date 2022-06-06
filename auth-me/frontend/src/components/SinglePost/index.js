@@ -1,4 +1,4 @@
-import { useHistory, useParams, NavLink } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './SinglePost.css';
@@ -8,6 +8,7 @@ import { Modal } from '../../context/Modal';
 import PostEdit from '../PostEdit';
 import CommentOnPost from '../CommentOnPost';
 import { fetchComments } from '../../store/commentsReducer';
+import { fetchPosts } from '../../store/postsReducer'; 
 
 const SinglePost = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -17,25 +18,28 @@ const SinglePost = () => {
   const dispatch = useDispatch();
   const [ showModal, setShowModal ] = useState(false);
   const [ showModal2, setShowModal2 ] = useState(false);
+  //const [ showModal3, setShowModal3 ] = useState(false);
+
 
 
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);
-  const postComments = Object.values(comments).find(comment => comment.PostId === singlePost.id);
-
-  console.log("-----Comments1: ", postComments.id);
-  console.log("-----Comments2: ", postComments.PostId);
-  
+  const postComments = Object.values(comments).filter(comment => comment.PostId === singlePost.id);
 
   const deletePost = (singlePost) => {
     dispatch(removePost(singlePost));
-
+    
     history.push('/posts');
 }
 
+ console.log("PostComments-----", postComments)
+
+// [postComments].map(postComment => console.log("id-- ", postComment, "description-- ", postComment));
+
 useEffect(() => {
   dispatch(fetchComments());
-}, [dispatch]);
+  dispatch(fetchPosts());
+}, [ dispatch]);
 
   if (!sessionUser) return <Redirect to="/login" />;
 
@@ -60,9 +64,9 @@ useEffect(() => {
         </div>
         <h1>Comments List</h1>
         <div className='comments'>
-          { postComments ? (postComments).map(({ id, description, userId }) => (
-            <div key={id}><NavLink to={`/users/${userId}`}>{description}</NavLink></div>
-          )) : <div>There are no comments yet...</div>}
+          { postComments.length ? postComments.map((postComment) => {
+            return <p key={postComment.id}>{postComment.description}</p>
+          }) : <p>There are no comments yet...</p>}
         </div>
       </>
     );
@@ -71,12 +75,18 @@ useEffect(() => {
       <>
         <div className='singlePost'>
           <h1>{singlePost.title}</h1>
+          <button onClick={() => setShowModal2(true)}>Comment</button>
+            {showModal2 && (
+              <Modal onClose={() => setShowModal2(false)}>
+                <CommentOnPost props={[setShowModal2, singlePost]} />
+              </Modal>
+            )}
         </div>
         <h1>Comments List</h1>
         <div className='comments'>
-        { postComments ? (postComments).map(({ id, description, userId }) => (
-            <div key={id}><NavLink to={`/users/${userId}`}>{description}</NavLink></div>
-          )) : <div>There are no comments yet...</div>}
+        { postComments.length ? postComments.map((postComment) => {
+          return <p key={postComment.id}>{postComment.description}</p>
+        }) : <p>There are no comments yet...</p>}
         </div>
       </>
     );
