@@ -21,7 +21,7 @@ const PostList = () => {
       <h1>Posts List</h1>
       <div>
         {Object.values(posts).map(({ id, title }) => (
-          <div key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></div>
+          <div key={id} className="postList"><NavLink to={`/posts/${id}`}>{title}</NavLink></div>
         ))}
       </div>
       <Switch>

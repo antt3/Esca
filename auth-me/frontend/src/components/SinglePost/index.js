@@ -28,10 +28,11 @@ const SinglePost = () => {
   const singlePost = Object.values(posts).find(post => post.id === +id);
   const postComments = Object.values(comments).filter(comment => comment.PostId === singlePost.id);
 
-useEffect(() => {
-  dispatch(fetchComments());
-  dispatch(fetchPosts());
-}, [ dispatch]);
+  useEffect(() => {
+    dispatch(fetchComments());
+    dispatch(fetchPosts());
+  }, [ dispatch ]);
+  
   if (!sessionUser) return <Redirect to="/login" />;
 
   if (singlePost.userId === sessionUser.id) {
