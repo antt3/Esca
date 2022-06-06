@@ -21,4 +21,20 @@
 #modal-content {
     position: absolute;
     background-color:white;
+    border: 1px solid grey;
+    border-radius: 20px;
+}
+
+#modal-content > form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#modal-content {
+    position: absolute;
+    background-color:white;
+    border: 1px solid grey;
+    border-radius: 20px;
 }

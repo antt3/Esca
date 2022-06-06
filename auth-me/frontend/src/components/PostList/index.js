@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import SinglePost from '../SinglePost';
@@ -14,14 +14,14 @@ const PostList = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  if (!sessionUser) return <Redirect to="/login" />;
+  if (!sessionUser) return <Redirect to="/splash" />;
 
   return (
     <div>
-      <h1>Posts List</h1>
+      <h1>Recent Posts</h1>
       <div>
         {Object.values(posts).map(({ id, title }) => (
-          <div key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></div>
+          <div key={id} className="postList"><NavLink to={`/posts/${id}`}>{title}</NavLink></div>
         ))}
       </div>
       <Switch>

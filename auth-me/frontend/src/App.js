@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupForm from "./components/SignupFormPage/SignupForm";
-import LoginForm from "./components/LoginFormModal/LoginForm";
+import SplashPage from "./components/SplashPage";
 import PostForm from "./components/PostFormModal/PostForm";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
@@ -27,11 +26,8 @@ function App() {
                     <Route exact path="/posts">
                         <PostList />
                     </Route>
-                    <Route exact path="/signup">
-                        <SignupForm />
-                    </Route>
-                    <Route exact path="/login">
-                        <LoginForm />
+                    <Route exact path="/splash">
+                        <SplashPage />
                     </Route>
                     <Route exact path="/posts/new">
                         <PostForm />

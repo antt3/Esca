@@ -8,6 +8,7 @@ import ProfileButton from './ProfileButton';
 import PostFormModal from '../PostFormModal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormPage';
+import DemoUserLogin from './DemoUserLogin';
 
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user);
@@ -25,17 +26,16 @@ function Navigation({ isLoaded }){
             <>
                 <LoginFormModal />
                 <SignupFormModal />
+                <DemoUserLogin />
             </>
         );
     }
   
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <div className='Nav'>
+            <NavLink className="home" exact to="/">Home</NavLink>
+            {isLoaded && sessionLinks}
+        </div>
     );
 }
 

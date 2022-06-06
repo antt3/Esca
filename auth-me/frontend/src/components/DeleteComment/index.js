@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './DeleteComment.css';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -17,14 +19,14 @@ function DeleteComment({props}) {
 
     }
   
-    if (!sessionUser) return <Redirect to="/login" />;
+    if (!sessionUser) return <Redirect to="/splash" />;
   
     return (
         <>
             <p>
                 Are you sure you want to delete this comment?
             </p>
-            <button onClick={(e)=> handleClick(e)}>Confirm</button>
+            <button className="delBut" onClick={(e)=> handleClick(e)}>Confirm</button>
         </>
     )
 }
