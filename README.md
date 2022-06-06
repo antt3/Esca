@@ -1,5 +1,5 @@
 # Esca
-Solo Project: 
+Solo React Quora Clone Project: Quora but it's all about food!!!
 
 ### Starting The App
 1. run npm install on the frontend folder, the backend folder, and the parent folder.
