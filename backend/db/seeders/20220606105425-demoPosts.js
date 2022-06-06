@@ -6,7 +6,7 @@ module.exports = {
 			'Posts',
 			[
 				{
-					title: 'How do season your fried eggs?',
+					title: 'How do you season your fried eggs?',
 					userId: 3,
 					createdAt: new Date(),
 					updatedAt: new Date(),
