@@ -46,13 +46,14 @@ useEffect(() => {
               </Modal>
             )}
         </div>
+        <h1>Comments List</h1>
         <div className='comments'>
-          {(postComments).map(({ id, description, userId }) => (
+          { postComments ? (postComments).map(({ id, description, userId }) => (
             <div>
               <NavLink to={`/users/${userId}`}>{description}</NavLink>
               <p key={id}>{description}</p>
             </div>
-          ))}
+          )) : <div>There are no comments yet...</div>}
         </div>
       </>
     );
@@ -62,14 +63,14 @@ useEffect(() => {
         <div className='singlePost'>
           <h1>{singlePost.title}</h1>
         </div>
-        <h1>Posts List</h1>
+        <h1>Comments List</h1>
         <div className='comments'>
-          {Object.values(postComments).map(({ id, description, userId }) => (
+        { postComments ? (postComments).map(({ id, description, userId }) => (
             <div>
               <NavLink to={`/users/${userId}`}>{description}</NavLink>
               <p key={id}>{description}</p>
             </div>
-          ))}
+          )) : <div>There are no comments yet...</div>}
         </div>
       </>
     );
