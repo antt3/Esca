@@ -21,7 +21,10 @@ const SinglePost = () => {
 
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);
-  const postComments = Object.values(comments).find(comment => comment.PostId === singlePost.id)
+  const postComments = Object.values(comments).find(comment => comment.PostId === singlePost.id);
+
+  console.log("-----Comments1: ", postComments.id);
+  console.log("-----Comments2: ", postComments.PostId);
   
 
   const deletePost = (singlePost) => {
@@ -58,10 +61,7 @@ useEffect(() => {
         <h1>Comments List</h1>
         <div className='comments'>
           { postComments ? (postComments).map(({ id, description, userId }) => (
-            <div>
-              <NavLink to={`/users/${userId}`}>{description}</NavLink>
-              <p key={id}>{description}</p>
-            </div>
+            <div key={id}><NavLink to={`/users/${userId}`}>{description}</NavLink></div>
           )) : <div>There are no comments yet...</div>}
         </div>
       </>
@@ -75,10 +75,7 @@ useEffect(() => {
         <h1>Comments List</h1>
         <div className='comments'>
         { postComments ? (postComments).map(({ id, description, userId }) => (
-            <div>
-              <NavLink to={`/users/${userId}`}>{description}</NavLink>
-              <p key={id}>{description}</p>
-            </div>
+            <div key={id}><NavLink to={`/users/${userId}`}>{description}</NavLink></div>
           )) : <div>There are no comments yet...</div>}
         </div>
       </>

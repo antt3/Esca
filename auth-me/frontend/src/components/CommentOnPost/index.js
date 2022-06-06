@@ -33,7 +33,7 @@ function CommentOnPost({props}) {
 
                 setShowModal2(false);
 
-                return history.push(`/posts/${returnedComment.Postid}`);
+                return history.push(`/posts/${returnedComment.PostId}`);
             }
             
         }
