@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { removePost } from "../../store/postsReducer";
 
-function EditForm({props}) {
+function DeletePost({props}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -32,4 +32,4 @@ function EditForm({props}) {
     )
 }
 
-export default EditForm
+export default DeletePost;
