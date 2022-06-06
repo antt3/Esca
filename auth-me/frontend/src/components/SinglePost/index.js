@@ -6,6 +6,7 @@ import { removePost } from '../../store/postsReducer';
 import { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import PostEdit from '../PostEdit';
+import CommentOnPost from '../CommentOnPost';
 import { fetchComments } from '../../store/commentsReducer';
 
 const SinglePost = () => {
@@ -15,6 +16,8 @@ const SinglePost = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [ showModal, setShowModal ] = useState(false);
+  const [ showModal2, setShowModal2 ] = useState(false);
+
 
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);
@@ -43,6 +46,12 @@ useEffect(() => {
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 <PostEdit props={[setShowModal, singlePost]} />
+              </Modal>
+            )}
+            <button onClick={() => setShowModal2(true)}>Comment</button>
+            {showModal2 && (
+              <Modal onClose={() => setShowModal2(false)}>
+                <CommentOnPost props={[setShowModal2, singlePost]} />
               </Modal>
             )}
         </div>
