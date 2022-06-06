@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './SinglePost.css';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import PostEdit from '../PostEdit';
 import CommentOnPost from '../CommentOnPost';
@@ -20,9 +20,6 @@ const SinglePost = () => {
   const [ showModal2, setShowModal2 ] = useState(false);
   const [ showModal3, setShowModal3 ] = useState(false);
   const [ showModal4, setShowModal4 ] = useState(false);
-
-
-
 
   const { id } = useParams();
   const singlePost = Object.values(posts).find(post => post.id === +id);

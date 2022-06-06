@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './DeleteComment.css';
 
 import { useDispatch, useSelector } from "react-redux";
