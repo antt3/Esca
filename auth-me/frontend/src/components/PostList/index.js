@@ -7,7 +7,6 @@ import './PostList.css';
 
 const PostList = () => {
   const sessionUser = useSelector(state => state.session.user);
-  // let [ reload, setReload ] = useState(0);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postState);
 
@@ -15,25 +14,16 @@ const PostList = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (reload < 2) {
-  //     setReload(reload++);
-  //   }
-  // }, [reload]);
-
-
-
   if (!sessionUser) return <Redirect to="/login" />;
 
   return (
     <div>
       <h1>Posts List</h1>
-      <ol>
+      <div>
         {Object.values(posts).map(({ id, title }) => (
-          <li key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></li>
+          <div key={id}><NavLink to={`/posts/${id}`}>{title}</NavLink></div>
         ))}
-      </ol>
-
+      </div>
       <Switch>
         <Route path='/posts/:id'>
           <SinglePost posts={posts} />

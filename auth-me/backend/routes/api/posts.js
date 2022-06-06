@@ -28,8 +28,7 @@ router.post(
     const { title, sessionUser } = req.body;
     const userId = sessionUser.id;
     const post = await Post.create({ title, userId });
-
-    // await setTokenCookie(res, sessionUser);
+    
 
     return res.json(post);
   })

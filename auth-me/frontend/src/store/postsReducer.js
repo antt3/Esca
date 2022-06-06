@@ -1,7 +1,6 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_POSTS = 'posts/loadPosts';
-const SINGLE_POST = 'posts/singlePost';
 const ADD_POST = 'posts/addPost';
 const EDIT_POST = 'posts/editPost';
 const DELETE_POST = 'posts/deletPost'
@@ -11,13 +10,6 @@ export const loadPosts = (posts) => {
     type: LOAD_POSTS,
     posts
   };
-};
-
-export const singlePost = (post) => {
-  return {
-    type: SINGLE_POST,
-    post
-  }
 };
 
 export const addPost = (post) => {
@@ -47,15 +39,6 @@ export const fetchPosts = () => async (dispatch) => {
     const posts = await response.json();
     dispatch(loadPosts(posts));
     return posts;
-  }
-};
-
-export const onePost = (payload) => async dispatch =>{
-  const response = await csrfFetch (`/api/marinas/${payload}`);
-
-  if(response.ok){
-      const details = await response.json();
-      dispatch(singlePost(details));
   }
 };
 
@@ -99,7 +82,7 @@ export const removePost = (postId) => async dispatch => {
   }
 };
 
-const initialState = { entries: [], isLoading: true };
+const initialState = {};
 
 const postReducer = (state = initialState, action) => {
   let newState;
@@ -108,10 +91,6 @@ const postReducer = (state = initialState, action) => {
     case LOAD_POSTS: 
       newState = {...state};
       action.posts.forEach((post) => newState[post.id] = post);
-      return newState
-    case SINGLE_POST:
-      newState = {...state}
-      newState.post = action.post
       return newState
     case ADD_POST:
       newState = {...state}
