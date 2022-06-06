@@ -3,6 +3,16 @@ h1 {
     justify-content: center;
 }
 
-a {
-    
+.postList {
+    display: flex;
+    justify-content: center;
 }
+
+.postList > a {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+

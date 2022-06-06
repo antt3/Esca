@@ -14,6 +14,7 @@ html {
 
 .home {
     text-decoration: none;
+    font-size: 20px;
 
 }
 
@@ -41,19 +42,43 @@ footer {
     margin-top: 20px;
 }
 
-a.about {
+a.about { 
+    font-size: 20px;
+}
+
+a {
     color: rgb(31, 63, 31);
     font-weight: bold;
-    font-size: 20px;
     text-decoration: none;
     transition: .5s;
 }
 
-a.about:hover {
+a:hover {
     color: black;
+    text-shadow: 1px 3px 3px grey;
     transition: .5s;
 }
 
 .profile {
     border-radius: 15px;
+    transition: .5s;
+    border-color: black;
+}
+
+.profile:hover {
+    box-shadow: 1px 3px 3px grey;
+    transition: .5s;
+}
+
+button {
+    border-radius: 15px;
+    border-color: black;
+    font-size: 15px;
+    background-color: lightcoral;
+    transition: .5s;
+}
+
+button:hover {
+    box-shadow: 1px 3px 3px grey;
+    transition: .5s;
 }

@@ -7,7 +7,7 @@ function PostFormModal() {
   
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Post</button>
+            <button onClick={() => setShowModal(true)}>Add Post</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <PostFormPage setShowModal={setShowModal} />
